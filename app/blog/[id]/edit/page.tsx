@@ -9,9 +9,9 @@ export default async function Page({params} : { params: Promise<{ id: string }> 
   if(!post) notFound();
 
   return (
-    <>
+    <div className="flex flex-col items-center ">
       <h1>Редактирование поста</h1>
       <EditForm post={post} /> 
-    </>
+    </div>
   )
 }
