@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 export default async function Page({params} : { params: Promise<{ id: string }> }){
   const {id} = await params;
-  const post = fetchPostsById(id);
+  const post = await fetchPostsById(id);
 
   if(!post) notFound();
 
@@ -11,7 +11,7 @@ export default async function Page({params} : { params: Promise<{ id: string }> 
     <>
       <h1>{post.title}</h1>
       <p>{post.body}</p>
-      <p>{post.authorName}</p>
+      <p>Author - {post.author_name}</p>
     </>
   )
 }

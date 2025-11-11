@@ -2,8 +2,8 @@ import { fetchPosts } from "@/app/lib/data"
 import { Post } from "@/app/lib/types";
 import Link from "next/link";
 
-export default function Posts() {
-  const posts:Post[] = fetchPosts();
+export default async function Posts() {
+  const posts:Post[] = await fetchPosts();
 
   return (
     <>
@@ -11,10 +11,18 @@ export default function Posts() {
         posts.map(post => {
           return (
             <div key={post.id}>
-              <h1>{post.title}</h1>
-              <p>{post.body}</p>
-              <Link href={`blog/${post.id}/edit`}>Редактировать</Link>
-              <Link href={`blog/${post.id}`}>Посмотреть</Link>
+              <h2>{post.title}</h2>
+              <p>
+                {post.body.substring(0, 90)}...
+                <Link
+                  href={`blog/${post.id}`}
+                  className="text-blue-300 underline"
+                >Посмотреть</Link>
+              </p>
+              <Link
+                href={`blog/${post.id}/edit`}
+                className="text-blue-300 underline"
+              >Редактировать</Link>
             </div>
           )
         })
