@@ -1,32 +1,71 @@
-import NextAuth from "next-auth"
+import NextAuth, { CredentialsSignin, DefaultSession } from "next-auth"
+import { JWT } from "next-auth/jwt"
 import Credentials from "next-auth/providers/credentials"
-import { User } from "./app/lib/types"
 import z from "zod"
+import { getUser } from "./app/lib/data"
 
-const userArray:User[] = [
-  {
-    id: '124',
-    username: 'Hello',
-    password: '5321'
+declare module "next-auth" {
+  interface User {
+    username: string | null
   }
-]
+
+  interface Session {
+    user: {
+      username: string | null
+    } & DefaultSession["user"]
+  }
+}
+
+declare module "next-auth/jwt"{
+  interface JWT {
+    username: string | null
+  }
+}
+
+// class UsernameError extends CredentialsSignin {
+//   code = "InvalidUsername"
+// }
+
+// class PasswordError extends CredentialsSignin {
+//  code = "InvalidPassword"
+// }
 
 export const {auth, signIn, signOut} = NextAuth({
   providers: [Credentials({
     async authorize(credentials, request) {
       const parsedCredentials = z.object({username: z.string(), password: z.string()}).safeParse(credentials)
-
       if(parsedCredentials.success){
         const {username, password} = parsedCredentials.data
-        const user = userArray.find(user => user.username === username)
-
+        const user = await getUser(username)
+        
         if(!user) throw new Error('', {cause: {code: 'InvalidUsername'}})
         if(user.password !== password) throw new Error('', {cause: {code: 'InvalidPassword'}})
-
+        
         return user
       }
 
       return null
     },
-  })]
+  })],
+  callbacks: {
+    authorized: ({request, auth}) => {
+      return !!auth
+    },
+    redirect: ({url}) => {
+      return '/blog'
+    },
+    session: ({session, token}) => {
+      if(token.username){
+        session.user.username = token.username
+      }
+      return session
+    },
+    jwt: ({token, user}) => {
+      if(user) {
+        // token.id = user.id
+        token.username = user.username
+      }
+      return token
+    }
+  }
 })
