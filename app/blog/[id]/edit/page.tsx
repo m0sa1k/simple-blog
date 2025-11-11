@@ -1,10 +1,14 @@
 import { fetchPostsById } from "@/app/lib/data";
 import EditForm from "@/app/ui/blog/edit-form";
-import { notFound } from "next/navigation";
+import { auth } from "@/auth";
+import { notFound, redirect } from "next/navigation";
 
 export default async function Page({params} : { params: Promise<{ id: string }> }){
+  const session = await auth()
+  if(!session) redirect('/login')
+
   const {id} = await params;
-  const post = fetchPostsById(id);
+  const post = await fetchPostsById(id);
 
   if(!post) notFound();
 
