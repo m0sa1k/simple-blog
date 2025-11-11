@@ -1,11 +1,14 @@
+'use client'
 import { editPost } from "@/app/lib/actions";
 import { Post } from "@/app/lib/types";
+import { useActionState } from "react";
 
-export default function EditForm({post}: {post: Post}){
+export default async function EditForm({post}: {post: Post}){
   const editPostWithId = editPost.bind(null, post.id);
+  const [state, formAction, isPending] = useActionState(editPostWithId, undefined)
 
   return (
-    <form action={editPostWithId}
+    <form action={formAction}
       className="flex flex-col items-start gap-1"
     >
       <label htmlFor="title">Title</label>
@@ -25,6 +28,7 @@ export default function EditForm({post}: {post: Post}){
         defaultValue={post.body}
       />
       <button type="submit">Send</button>
+      {state?.message && <p className="text-red-300">{state.message}</p>}
     </form>
   )
 }
