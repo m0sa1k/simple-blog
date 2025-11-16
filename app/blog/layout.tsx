@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth"
 import Link from "next/link"
+import CustomLink from "../ui/CustomLink"
 
 export default async function BlogLayout({
   children
@@ -25,8 +26,8 @@ export default async function BlogLayout({
           </>
             :
           <>
-            <Link href='/signup'>Регистрация</Link>
-            <Link href='/login'>Войти</Link>
+            <CustomLink href='/signup'>Регистрация</CustomLink>
+            <CustomLink href='/login'>Войти</CustomLink>
           </>
         }
       </nav>

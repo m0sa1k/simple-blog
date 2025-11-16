@@ -1,17 +1,14 @@
-'use client'
-import Link from "next/link";
-import { useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
+import CustomLink from "./ui/CustomLink";
 
 export default function Home() {
-  const [loading, setLoading] = useState(false)
-  const notify = () => toast('Wow so easy!')
+  // const notify = () => toast('Wow so easy!')
 
   return (
-    <div>
-      <h1>SIMPLE BLOG</h1>
-      <button onClick={notify}>Notify</button>
-      {loading ? <p>Загружаем...</p> : <Link href='/blog' onClick={() => setLoading(true)}>Читать</Link>}
+    <div className="">
+      <p className="text-9xl my-40 text-center">SIMPLE BLOG</p>
+      {/* <button onClick={notify}>Notify</button> */}
+      <CustomLink href="/blog">Blog</CustomLink>
     </div>
   );
 }
