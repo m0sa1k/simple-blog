@@ -3,7 +3,7 @@ import { editPost } from "@/app/lib/actions";
 import { Post } from "@/app/lib/types";
 import { useActionState } from "react";
 
-export default async function EditForm({post}: {post: Post}){
+export default function EditForm({post}: {post: Post}){
   const editPostWithId = editPost.bind(null, post.id);
   const [state, formAction, isPending] = useActionState(editPostWithId, undefined)
 

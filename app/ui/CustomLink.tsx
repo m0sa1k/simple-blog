@@ -12,7 +12,10 @@ export default function CustomLink({
   const [loading, setLoading] = useState(false)
 
   return (<>
-      {loading ? <span>Загружаю...</span> : <Link href={href} onClick={()=>setLoading(true)}>{children}</Link>}
+      {loading ? <span>Загружаю...</span> : <Link
+        href={href}
+        onClick={()=>setLoading(true)}
+        className='hover:text-gray-700 hover:underline'>{children}</Link>}
     </>
   )
 }

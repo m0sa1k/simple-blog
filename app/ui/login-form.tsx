@@ -12,17 +12,21 @@ export default function LoginForm(){
     >
       <label htmlFor="username">Username</label>
       <input
+        className="border border-gray-500 rounded-lg px-2 mb-2 bg-white"
         id="username"
         name="username"
         type="text"
       />
       <label htmlFor="password">Password</label>
       <input
+        className="border border-gray-500 rounded-lg px-2 mb-2 bg-white"
         id="password"
         name="password"
         type="password"
       />
-      <button type="submit">Send</button>
+      <button
+        className="bg-green-400 text-white px-1 py-2 rounded-lg"
+        type="submit">Send</button>
       {state && state.message}
     </form>
   )

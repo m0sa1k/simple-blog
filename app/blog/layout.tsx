@@ -11,24 +11,24 @@ export default async function BlogLayout({
 
   return (
     <div>
-      <nav className="flex flex-row bg-yellow-200 justify-right gap-2 min-h-5">
+      <nav className="flex flex-row bg-yellow-200 justify-between items-center px-5 min-h-10">
         <Link href='/'>LOGO</Link>
         {
           session?.user ? 
-          <>
+          <div className="flex gap-5">
             <p>Hello, {session.user.username}</p>
             <form action={async () => {
               'use server'
               await signOut();
             }}>
-              <button>Sign Out</button>
+              <button>Выйти</button>
             </form>
-          </>
+          </div>
             :
-          <>
+          <div className="flex gap-5">
             <CustomLink href='/signup'>Регистрация</CustomLink>
             <CustomLink href='/login'>Войти</CustomLink>
-          </>
+          </div>
         }
       </nav>
       <div className="max-w-2xl m-auto">
