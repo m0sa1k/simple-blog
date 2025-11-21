@@ -31,6 +31,9 @@ declare module "next-auth/jwt"{
 // }
 
 export const {auth, signIn, signOut} = NextAuth({
+  pages: {
+    signIn: '/login'
+  },
   providers: [Credentials({
     async authorize(credentials, request) {
       const parsedCredentials = z.object({username: z.string(), password: z.string()}).safeParse(credentials)
