@@ -1,6 +1,6 @@
 import { fetchPosts } from "@/app/lib/data"
 import { Post } from "@/app/lib/types";
-import Link from "next/link";
+import CustomLink from "../CustomLink";
 
 export default async function Posts() {
   const posts:Post[] = await fetchPosts();
@@ -10,19 +10,22 @@ export default async function Posts() {
       {
         posts.map(post => {
           return (
-            <div key={post.id}>
-              <h2>{post.title}</h2>
-              <p>
+            <div
+              className="min-h-20 border-b-2 border-yellow-200 mb-3 pb-1"
+              key={post.id}>
+              <h2 className="text-3xl mb-2">{post.title}</h2>
+              <p className="mb-1">
                 {post.body.substring(0, 90)}...
-                <Link
-                  href={`blog/${post.id}`}
-                  className="text-blue-300 underline"
-                >Посмотреть</Link>
+                
               </p>
-              <Link
-                href={`blog/${post.id}/edit`}
-                className="text-blue-300 underline"
-              >Редактировать</Link>
+              <div className="flex justify-between">
+                <CustomLink
+                    href={`blog/${post.id}`}
+                  >Читать</CustomLink>
+                <CustomLink
+                  href={`blog/${post.id}/edit`}
+                >Редактировать</CustomLink>
+              </div>
             </div>
           )
         })
