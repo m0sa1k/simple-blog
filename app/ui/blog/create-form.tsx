@@ -7,34 +7,36 @@ export default function CreateForm(){
 
   return (
     <form action={formAction}
-      className="flex flex-col items-start gap-1"
+      className="flex flex-col items-start gap-2"
     >
-      <label htmlFor="title">Title</label>
+      <label className="text-lg" htmlFor="title">Заголовок</label>
       <input
         id="title"
         name="title"
         type="text"
+        className="border w-full p-1 rounded-sm"
         defaultValue={state?.defaultValues?.title}
       />
 
       {state?.errors && <p className="text-red-600">{state.errors.title}</p>}
 
-      <label htmlFor="text">Text</label>
+      <label className="text-lg" htmlFor="text">Текст поста</label>
       <textarea
         id="text"
         name="text"
         rows={10}
         cols={40}
         defaultValue={state?.defaultValues?.text}
+        className="border w-full p-1 rounded-sm"
       />
 
       {state?.errors && <p className="text-red-600">{state.errors.text}</p>}
 
       <button type="submit"
-        className="cursor-pointer border-2 border-solid border-amber-500 rounded-r-lg px-10 py-1"
+        className="transition duration-300 ease-in-out cursor-pointer border-3 border-yellow-200 rounded-lg px-10 py-1 hover:bg-yellow-400 hover:text-white"
         disabled={isPending}
       >
-        Send
+        Отправить
       </button>
 
       {state?.message && <p className="text-red-600">{state.message}</p>}

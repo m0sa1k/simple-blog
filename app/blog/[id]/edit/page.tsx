@@ -14,7 +14,7 @@ export default async function Page({params} : { params: Promise<{ id: string }> 
 
   return (
     <div className="flex flex-col items-center ">
-      <h1>Редактирование поста</h1>
+      <h1 className="mb-2 text-lg">Редактирование поста</h1>
       <EditForm post={post} /> 
     </div>
   )

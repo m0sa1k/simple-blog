@@ -4,10 +4,12 @@ import { useState } from "react";
 
 export default function CustomLink({
   children,
-  href
+  href,
+  className
 } : {
   children: React.ReactNode,
-  href: string
+  href: string,
+  className?: string;
 }){
   const [loading, setLoading] = useState(false)
 
@@ -15,7 +17,7 @@ export default function CustomLink({
       {loading ? <span>Загружаю...</span> : <Link
         href={href}
         onClick={()=>setLoading(true)}
-        className='hover:text-gray-700 hover:underline'>{children}</Link>}
+        className={`hover:underline ${className}`}>{children}</Link>}
     </>
   )
 }

@@ -5,8 +5,8 @@ export default function Home() {
   // const notify = () => toast('Wow so easy!')
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-200">
-      <p className="text-9xl mt-40 mb-20 text-center">SIMPLE BLOG</p>
+    <div className="flex flex-col items-center bg-gray-200 w-full min-h-screen">
+      <p className="mt-40 mb-20 text-center text-8xl md:text-9xl">SIMPLE BLOG</p>
       {/* <button onClick={notify}>Notify</button> */}
       <CustomLink href="/blog">Читать</CustomLink>
     </div>

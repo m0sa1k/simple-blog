@@ -11,7 +11,7 @@ export default async function BlogLayout({
 
   return (
     <div>
-      <nav className="flex flex-row bg-yellow-200 justify-between items-center px-5 min-h-10">
+      <nav className="flex flex-row bg-yellow-200 justify-between items-center px-5 min-h-16 shadow-md mb-4">
         <Link href='/'>LOGO</Link>
         {
           session?.user ? 
@@ -31,7 +31,7 @@ export default async function BlogLayout({
           </div>
         }
       </nav>
-      <div className="max-w-2xl m-auto">
+      <div className="max-w-2xl m-auto bg-white px-8 py-4 shadow-xl">
         {children}
       </div>
     </div>
