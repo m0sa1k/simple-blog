@@ -1,6 +1,7 @@
 import { fetchPosts } from "@/app/lib/data"
 import { Post } from "@/app/lib/types";
 import CustomLink from "../CustomLink";
+import Link from "next/link";
 
 export default async function Posts() {
   const posts:Post[] = await fetchPosts();
@@ -26,9 +27,9 @@ export default async function Posts() {
                     href={`blog/${post.id}`}
                     className="text-white bg-indigo-400 rounded-full px-4 hover:bg-indigo-600"
                   >Читать</CustomLink>
-                <CustomLink
+                <Link
                   href={`blog/${post.id}/edit`}
-                >Редактировать</CustomLink>
+                >Редактировать</Link>
               </div>
             </div>
           )
