@@ -57,7 +57,7 @@ export const createPost = async (state: PostState, formData: FormData): Promise<
 
   const session = await auth()
   
-  if(session) 
+  if(session?.user)
 
   try {
     await sql`
@@ -98,7 +98,11 @@ export const editPost = async (id: string, state: PostState, formData: FormData)
   const session = await auth()
   let post = await fetchPostsById(id)
 
-  if(session && session.user.username === post.author_name) 
+  if(!session || session.user?.username !== post.author_name) {
+    return {
+      message: 'Что-то пошло не так'
+    }
+  }
 
   try {
     await sql`
@@ -113,7 +117,7 @@ export const editPost = async (id: string, state: PostState, formData: FormData)
       }
   }
 
-  redirect('/blog')
+  redirect('/blog');
 }
 
 export const signup = async (state: UserErrorState, formData: FormData): Promise<UserErrorState> => {
@@ -162,24 +166,6 @@ export const signup = async (state: UserErrorState, formData: FormData): Promise
     console.log('Database Error.', error)
     return {message: 'База данных не доступна'}
   }
-
-  // await signIn('credentials', {
-  //   username: result.data.username,
-  //   password: result.data.pass,
-  //   redirectTo: '/blog'
-  // })
-  
-  // try {
-  //   await signIn('credentials', {
-  //     username: result.data.username,
-  //     password: result.data.pass,
-  //     redirectTo: '/blog'
-  //   })
-  // } catch(error) {
-  //   console.log(error)
-  // }
-
-  // redirect('/blog')
 }
 
 export const authenticate = async (state: {message: string} | undefined , formData: FormData) => {
